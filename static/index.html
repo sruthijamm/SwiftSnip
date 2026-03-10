@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snippet Manager</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <h1 class="app-title">Snippets</h1>
+
+      <!-- Search -->
+      <input type="text" class="search-bar" placeholder="Search snippets..." />
+
+      <!-- Categories -->
+      <div class="categories">
+        <p class="section-label">Categories</p>
+        <ul class="category-list">
+          <li class="category-item active">All</li>
+          <li class="category-item">Email Templates</li>
+          <li class="category-item">Common Replies</li>
+          <li class="category-item">To-Do Templates</li>
+        </ul>
+      </div>
+
+      <!-- Snippet List -->
+      <div class="snippets">
+        <p class="section-label">All Snippets</p>
+        <ul class="snippet-list" id="snippet-list">
+          <!-- Snippets will load here dynamically -->
+        </ul>
+      </div>
+
+      <!-- Add Button -->
+      <button class="add-btn">+ New Snippet</button>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel" id="right-panel">
+      <div class="empty-state">
+        <p>Select a snippet to view it here ✨</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

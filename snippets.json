@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "title": "Follow-up Email",
+      "content": "Hi [Name],\n\nJust following up on my previous email. Please let me know if you have any questions!\n\nBest,\n[Your Name]",
+      "category": "Email Templates",
+      "created_at": "2026-03-05"
+    },
+    {
+      "id": 2,
+      "title": "Thanks for reaching out",
+      "content": "Thank you so much for reaching out! I'll get back to you within 24 hours.",
+      "category": "Common Replies",
+      "created_at": "2026-03-05"
+    },
+    {
+      "id": 3,
+      "title": "Daily To-Do Template",
+      "content": "🌅 Morning:\n- [ ] \n- [ ] \n\n🌆 Afternoon:\n- [ ] \n- [ ] \n\n🌙 Evening:\n- [ ] ",
+      "category": "To-Do Templates",
+      "created_at": "2026-03-05"
+    }
+  ]

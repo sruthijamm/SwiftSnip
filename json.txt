@@ -1,0 +1,16 @@
+=== Email Templates ===
+Follow Up 
+
+Thank you for reaching out 
+
+=== Replies ===
+
+
+=== TO DO ===
+Daily To Do Templates
+
+=== Quotes / Affirmations ===
+
+
+=== Code Snippets ===
+Creating a blank project file with index.html, script.js, style.css
