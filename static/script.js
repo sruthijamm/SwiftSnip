@@ -39,3 +39,32 @@ async function loadSnippets() {
   
   // Load snippets when page opens
   loadSnippets();
+
+  // Show the Add Snippet form in the right panel
+function showAddForm() {
+  const panel = document.getElementById('right-panel');
+  panel.innerHTML = `
+    <div class="snippet-form">
+      <h2 class="form-title">New Snippet</h2>
+      <input type="text" id="form-title" placeholder="Title" class="form-input" />
+      <input type="text" id="form-category" placeholder="Category" class="form-input" />
+      <textarea id="form-content" placeholder="Your snippet content..." class="form-textarea"></textarea>
+      <button class="save-btn" onclick="saveSnippet()">Save Snippet</button>
+    </div>
+  `;
+}
+
+// Save the new snippet to the API
+async function saveSnippet() {
+  const title = document.getElementById('form-title').value;
+  const category = document.getElementById('form-category').value;
+  const content = document.getElementById('form-content').value;
+
+  await fetch('/snippets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, category, content })
+  });
+
+  loadSnippets();
+}
