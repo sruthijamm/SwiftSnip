@@ -5,7 +5,7 @@
   }
   
   body {
-    font-family: 'Georgia', serif;
+    font-family: 'DM Sans', sans-serif;
     background-color: #f9f7f4;
     color: #2c2c2c;
     height: 100vh;
@@ -34,9 +34,10 @@
   
   .app-title {
     font-size: 28px;
-    font-weight: normal;
+    font-weight: 400;
     letter-spacing: -0.5px;
     color: #1a1a1a;
+    font-family: 'Playfair Display', serif;
   }
   
   .search-bar {
@@ -147,9 +148,10 @@
   
   .snippet-title {
     font-size: 28px;
-    font-weight: normal;
+    font-weight: 400;
     color: #1a1a1a;
     letter-spacing: -0.5px;
+    font-family: 'Playfair Display', serif;
   }
   
   .snippet-content {
@@ -189,9 +191,10 @@
   
   .form-title {
     font-size: 28px;
-    font-weight: normal;
+    font-weight: 400;
     color: #1a1a1a;
     letter-spacing: -0.5px;
+    font-family: 'Playfair Display', serif;
   }
   
   .form-input {
@@ -277,3 +280,29 @@
   .delete-btn:hover {
     background-color: #fde0de;
   }
+
+  /* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.snippet-view, .snippet-form {
+  animation: fadeIn 0.25s ease;
+}
+
+.snippet-item {
+  transition: all 0.15s ease;
+}
+
+.category-item {
+  transition: all 0.15s ease;
+}
+
+.add-btn, .save-btn, .copy-btn, .edit-btn, .delete-btn {
+  transition: all 0.15s ease;
+}
+
+.search-bar {
+  transition: border-color 0.15s ease;
+}
