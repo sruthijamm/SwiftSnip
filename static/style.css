@@ -244,3 +244,36 @@
   .save-btn:hover {
     background-color: #444;
   }
+
+  .action-btns {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn {
+    padding: 10px 20px;
+    background-color: #f0ece4;
+    color: #2c2c2c;
+    border: 1px solid #e0d9ce;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover {
+    background-color: #e8e0d5;
+  }
+  
+  .delete-btn {
+    padding: 10px 20px;
+    background-color: #fff0f0;
+    color: #c0392b;
+    border: 1px solid #f5c0bb;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #fde0de;
+  }

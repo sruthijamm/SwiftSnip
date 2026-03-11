@@ -16,17 +16,21 @@ async function loadSnippets() {
   }
   
   // Show a snippet in the right panel
-  function showSnippet(snippet) {
-    const panel = document.getElementById('right-panel');
-    panel.innerHTML = `
-      <div class="snippet-view">
-        <p class="snippet-category">${snippet.category}</p>
-        <h2 class="snippet-title">${snippet.title}</h2>
-        <pre class="snippet-content">${snippet.content}</pre>
-        <button class="copy-btn" onclick="copySnippet('${snippet.id}')">Copy to Clipboard</button>
+function showSnippet(snippet) {
+  const panel = document.getElementById('right-panel');
+  panel.innerHTML = `
+    <div class="snippet-view">
+      <p class="snippet-category">${snippet.category}</p>
+      <h2 class="snippet-title">${snippet.title}</h2>
+      <pre class="snippet-content">${snippet.content}</pre>
+      <div class="action-btns">
+        <button class="copy-btn" onclick="copySnippet()">Copy to Clipboard</button>
+        <button class="edit-btn" onclick="showEditForm(${snippet.id}, '${snippet.title}', '${snippet.category}', \`${snippet.content}\`)">Edit</button>
+        <button class="delete-btn" onclick="deleteSnippet(${snippet.id})">Delete</button>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
   
   // Copy snippet content to clipboard
   function copySnippet(id) {
@@ -65,6 +69,50 @@ async function saveSnippet() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title, category, content })
   });
+
+  loadSnippets();
+}
+
+// Show edit form
+function showEditForm(id, title, category, content) {
+  const panel = document.getElementById('right-panel');
+  panel.innerHTML = `
+    <div class="snippet-form">
+      <h2 class="form-title">Edit Snippet</h2>
+      <input type="text" id="form-title" value="${title}" class="form-input" />
+      <input type="text" id="form-category" value="${category}" class="form-input" />
+      <textarea id="form-content" class="form-textarea">${content}</textarea>
+      <button class="save-btn" onclick="updateSnippet(${id})">Save Changes</button>
+    </div>
+  `;
+}
+
+// Update snippet
+async function updateSnippet(id) {
+  const title = document.getElementById('form-title').value;
+  const category = document.getElementById('form-category').value;
+  const content = document.getElementById('form-content').value;
+
+  await fetch(`/snippets/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, category, content })
+  });
+
+  loadSnippets();
+}
+
+// Delete snippet
+async function deleteSnippet(id) {
+  await fetch(`/snippets/${id}`, {
+    method: 'DELETE'
+  });
+
+  document.getElementById('right-panel').innerHTML = `
+    <div class="empty-state">
+      <p>Select a snippet to view it here ✨</p>
+    </div>
+  `;
 
   loadSnippets();
 }

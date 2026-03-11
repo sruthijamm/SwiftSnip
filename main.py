@@ -50,3 +50,34 @@ def create_snippet(snippet: Snippet):
         json.dump(snippets, f, indent=2)
     
     return new_snippet
+
+# Update an existing snippet
+@app.put("/snippets/{snippet_id}")
+def update_snippet(snippet_id: int, snippet: Snippet):
+    with open(DATA_FILE, "r") as f:
+        snippets = json.load(f)
+    
+    for i, s in enumerate(snippets):
+        if s["id"] == snippet_id:
+            snippets[i]["title"] = snippet.title
+            snippets[i]["content"] = snippet.content
+            snippets[i]["category"] = snippet.category
+            break
+    
+    with open(DATA_FILE, "w") as f:
+        json.dump(snippets, f, indent=2)
+    
+    return snippets[i]
+
+# Delete a snippet
+@app.delete("/snippets/{snippet_id}")
+def delete_snippet(snippet_id: int):
+    with open(DATA_FILE, "r") as f:
+        snippets = json.load(f)
+    
+    snippets = [s for s in snippets if s["id"] != snippet_id]
+    
+    with open(DATA_FILE, "w") as f:
+        json.dump(snippets, f, indent=2)
+    
+    return {"message": "Snippet deleted!"}
