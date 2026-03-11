@@ -15,18 +15,16 @@
       <h1 class="app-title">Snippets</h1>
 
       <!-- Search -->
-      <input type="text" class="search-bar" placeholder="Search snippets..." />
+      <input type="text" class="search-bar" placeholder="Search snippets..." oninput="searchSnippets(this.value)" />
 
       <!-- Categories -->
-      <div class="categories">
-        <p class="section-label">Categories</p>
-        <ul class="category-list">
-          <li class="category-item active">All</li>
-          <li class="category-item">Email Templates</li>
-          <li class="category-item">Common Replies</li>
-          <li class="category-item">To-Do Templates</li>
-        </ul>
-      </div>
+      <ul class="category-list">
+        <li class="category-item active" onclick="filterByCategory('All', this)">All</li>
+        <li class="category-item" onclick="filterByCategory('Email Templates', this)">Email Templates</li>
+        <li class="category-item" onclick="filterByCategory('Common Replies', this)">Common Replies</li>
+        <li class="category-item" onclick="filterByCategory('To-Do Templates', this)">To-Do Templates</li>
+        <li class="category-item" onclick="filterByCategory('Affirmations', this)">Affirmations</li>
+      </ul>
 
       <!-- Snippet List -->
       <div class="snippets">

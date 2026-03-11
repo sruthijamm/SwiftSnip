@@ -1,21 +1,50 @@
+let allSnippets = [];
+
 // Fetch snippets from the API and display them
 async function loadSnippets() {
-    const response = await fetch('/snippets');
-    const snippets = await response.json();
-  
-    const list = document.getElementById('snippet-list');
-    list.innerHTML = '';
-  
-    snippets.forEach(snippet => {
-      const li = document.createElement('li');
-      li.classList.add('snippet-item');
-      li.textContent = snippet.title;
-      li.onclick = () => showSnippet(snippet);
-      list.appendChild(li);
-    });
+  const response = await fetch('/snippets');
+  allSnippets = await response.json();
+  renderSnippets(allSnippets);
+}
+
+// Render a given list of snippets
+function renderSnippets(snippets) {
+  const list = document.getElementById('snippet-list');
+  list.innerHTML = '';
+
+  snippets.forEach(snippet => {
+    const li = document.createElement('li');
+    li.classList.add('snippet-item');
+    li.textContent = snippet.title;
+    li.onclick = () => showSnippet(snippet);
+    list.appendChild(li);
+  });
+}
+
+// Search snippets in real time
+function searchSnippets(query) {
+  const filtered = allSnippets.filter(s =>
+    s.title.toLowerCase().includes(query.toLowerCase()) ||
+    s.content.toLowerCase().includes(query.toLowerCase())
+  );
+  renderSnippets(filtered);
+}
+
+// Filter by category
+function filterByCategory(category, element) {
+  // Update active state
+  document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+
+  if (category === 'All') {
+    renderSnippets(allSnippets);
+  } else {
+    const filtered = allSnippets.filter(s => s.category === category);
+    renderSnippets(filtered);
   }
-  
-  // Show a snippet in the right panel
+}
+
+// Show a snippet in the right panel
 function showSnippet(snippet) {
   const panel = document.getElementById('right-panel');
   panel.innerHTML = `
@@ -31,20 +60,17 @@ function showSnippet(snippet) {
     </div>
   `;
 }
-  
-  // Copy snippet content to clipboard
-  function copySnippet(id) {
-    const content = document.querySelector('.snippet-content').textContent;
-    navigator.clipboard.writeText(content);
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Copied! ✓';
-    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
-  }
-  
-  // Load snippets when page opens
-  loadSnippets();
 
-  // Show the Add Snippet form in the right panel
+// Copy snippet content to clipboard
+function copySnippet() {
+  const content = document.querySelector('.snippet-content').textContent;
+  navigator.clipboard.writeText(content);
+  const btn = document.querySelector('.copy-btn');
+  btn.textContent = 'Copied! ✓';
+  setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+}
+
+// Show add form
 function showAddForm() {
   const panel = document.getElementById('right-panel');
   panel.innerHTML = `
@@ -58,7 +84,7 @@ function showAddForm() {
   `;
 }
 
-// Save the new snippet to the API
+// Save new snippet
 async function saveSnippet() {
   const title = document.getElementById('form-title').value;
   const category = document.getElementById('form-category').value;
@@ -104,9 +130,7 @@ async function updateSnippet(id) {
 
 // Delete snippet
 async function deleteSnippet(id) {
-  await fetch(`/snippets/${id}`, {
-    method: 'DELETE'
-  });
+  await fetch(`/snippets/${id}`, { method: 'DELETE' });
 
   document.getElementById('right-panel').innerHTML = `
     <div class="empty-state">
@@ -116,3 +140,6 @@ async function deleteSnippet(id) {
 
   loadSnippets();
 }
+
+// Load snippets when page opens
+loadSnippets();

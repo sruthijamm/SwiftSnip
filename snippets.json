@@ -19,12 +19,5 @@
     "content": "\ud83c\udf05 Morning:\n- [ ] \n- [ ] \n\n\ud83c\udf06 Afternoon:\n- [ ] \n- [ ] \n\n\ud83c\udf19 Evening:\n- [ ] ",
     "category": "To-Do Templates",
     "created_at": "2026-03-05"
-  },
-  {
-    "id": 4,
-    "title": "Quote",
-    "content": "Today is going to be a good day!",
-    "category": "Affirmation",
-    "created_at": "2026-03-10"
   }
 ]
